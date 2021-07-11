@@ -17,21 +17,25 @@ namespace HttpClientConsoleApp
             List<UserModel> parsedResult = JsonConvert.DeserializeObject<List<UserModel>>(result);
 
             string input = "";
-            Console.WriteLine("Hello, I'm HTTP client demo app!");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Hello, I'm HTTP client demo app!. The functionality allows to find address data, relevant to the name provided.");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 
             while (input != "Exit")
             {
-                Console.WriteLine("Please input User name or fragment of it");
-                string name_ = Console.ReadLine();
-                input = name_;
-
+                Console.WriteLine("Please input User name or fragment of it, otherwise use command 'Exit' to leave the app.");
+                input = Console.ReadLine();
+                
                 try
                 {
                     if (input != "Exit")
-                    { 
-                    UserModel selectedUser = parsedResult.First(a => a.Name.Contains(input));
-                    Console.WriteLine($"'Street': {selectedUser.Address.Street} 'Suite': {selectedUser.Address.Suite}" +
-                        $" 'City': {selectedUser.Address.City} 'ZIP code': {selectedUser.Address.Zipcode}");
+                    {
+                        UserModel selectedUser = parsedResult.First(a => a.Name.Contains(input));
+                        Console.WriteLine("Based on your input we found:");
+                        Console.WriteLine($"User Name: {selectedUser.Name}; Street: {selectedUser.Address.Street}" +
+                        $"; Suite: {selectedUser.Address.Suite}; City: {selectedUser.Address.City}; ZIP code: {selectedUser.Address.Zipcode}");
+                        Console.WriteLine("End of the record.");
+                        Console.WriteLine("");
                     }
                 }
                 catch (Exception)
@@ -40,6 +44,5 @@ namespace HttpClientConsoleApp
                 }
             }
         }
-
     }
 }
